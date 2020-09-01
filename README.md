@@ -1,24 +1,5 @@
-# README
+A microblog app which allows you to create an account, create text or image posts, upvote or downvote other people's posts, search users and add friends, see other peoples profiles. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**UNDER CONSTRUCTION**
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Created with Ruby 2.7 and Rails 6.
