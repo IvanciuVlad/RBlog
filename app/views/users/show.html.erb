@@ -1,10 +1,11 @@
 <h2>User Details</h2>
 
+<% if current_user.id != @user.id  %>
 <div class="card card-header results-block">
   <table class="col-md-12">
     <tbody>
     <tr>
-      <td><strong>Name: </strong> <%= @user.full_name %></td>
+      <td><strong>Username: </strong> <%= @user.username %></td>
       <td><strong>Email: </strong> <%= @user.email %></td>
       <td>
         <% if current_user.not_friends_with?(@user.id) %>
@@ -16,4 +17,16 @@
     </tr>
     </tbody>
   </table>
+</div>
+<% end %>
+
+<h4 align="center">
+  <%= @user.username %>'s articles
+</h4>
+<div class="center">
+  <%= will_paginate @user_articles %>
+</div>
+<%= render 'articles/article', obj: @user.articles %>
+<div class="center">
+  <%= will_paginate @user_articles %>
 </div>

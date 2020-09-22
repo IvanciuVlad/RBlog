@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :articles, dependent: :destroy
+  has_many :article_categories
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,6 +30,7 @@ class User < ApplicationRecord
   def except_current_user(users)
     users.reject {|user| user.id == self.id}
   end
+
 
   def not_friends_with?(if_of_friend)
     !self.friends.where(id: if_of_friend).exists?
