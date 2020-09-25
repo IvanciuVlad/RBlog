@@ -45,6 +45,17 @@
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <% form_tag search_friend_path, remote: true, method: :get do %>
+          <div class="form-inline my-2 my-lg-0">
+            <%= text_field_tag :friend, params[:friend], placeholder: "Username", autofocus: true, class: "form-control form-control-lg" %>
+          </div>
+          <div class="col-sm-3 no-left-padding">
+            <% link_to my_friends_path %>
+            <%= button_tag type: :submit, class: "btn btn-success" do %>
+              <%= icon('fas', 'search fa-2x') %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :articles, dependent: :destroy
   has_many :article_categories
+  has_many :comments
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
