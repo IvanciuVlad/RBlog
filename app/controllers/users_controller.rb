@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :set_user, only: %i[edit update show]
+  before_action :require_same_user, only: %i[edit update]
   before_action :require_admin, only: [:destroy]
 
   def show
@@ -18,21 +18,25 @@ class UsersController < ApplicationController
       @friends = current_user.except_current_user(@friends)
       if @friends
         respond_to do |format|
-          format.js{render partial: 'users/friend_result'}
+          format.js { render partial: 'users/friend_result' }
         end
       else
         respond_to do |format|
           flash.now[:alert] = "Couldn't find user"
-          format.js{render partial: 'users/friend_result'}
+          format.js { render partial: 'users/friend_result' }
         end
       end
     else
       respond_to do |format|
-        flash.now[:alert] = "Please enter a name of email"
-        format.js{render partial: 'users/friend_result'}
+        flash.now[:alert] = 'Please enter a name of email'
+        format.js { render partial: 'users/friend_result' }
       end
     end
   end
+
+  def update; end
+
+  def destroy; end
 
   private
 
@@ -45,15 +49,15 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user and !current_user.admin?
-      flash[:danger] = "You can only edit your own account"
+    if (current_user != @user) && !current_user.admin?
+      flash[:danger] = 'You can only edit your own account'
       redirect_to root_path
     end
   end
 
   def require_admin
-    if logged_in? and !current_user.admin?
-      flash[:danger] = "Only admin users cand perform that action"
+    if logged_in? && !current_user.admin?
+      flash[:danger] = 'Only admin users can perform that action'
       redirect_to root_path
     end
   end

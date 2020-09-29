@@ -1,0 +1,23 @@
+<% obj.each do |comment| %>
+  <div class="row">
+    <div class="col-xs-8 xol-xs-offset2">
+      <div class="well well-lg">
+        <div class="art-comment">
+          <div class="comment-description">
+            <%= comment.description %>
+          </div>
+          <div class="comment-meta-details">
+            <small>
+              <% if current_user.id == comment.user_id or current_user.admin %>
+                <%= link_to "Edit", edit_article_comment_path(comment.article_id), class: "btn btn-link btn-sm" %>
+              <% end %>
+              Created by: <%= User.find(comment.user_id).username if comment.user_id %>
+              ", <%= time_ago_in_words(comment.created_at) %>
+              ago, last updated: <%= time_ago_in_words(comment.updated_at) %> ago.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

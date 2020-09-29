@@ -3,6 +3,9 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+a {
+  color: #CC0000;
+}
 
 .user-name {
   margin-top: 3.5%;
@@ -106,6 +109,7 @@ footer ul li {
 
 .badge {
   background-color: #CEF6F2;
+  color: #CC0000;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
@@ -113,4 +117,24 @@ footer ul li {
 
 .input_checkbox input {
   width: auto !important;
+}
+
+.art-comments {
+  border-top: 1px solid #eaeaea;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.comment-description {
+  margin-top: 0;
+  color: black;
+}
+
+.comment-meta-details {
+  border-top: 1px solid #eaeaea;
+  margin-top: 5px;
+}
+
+.results-block {
+  background-color: white;
 }

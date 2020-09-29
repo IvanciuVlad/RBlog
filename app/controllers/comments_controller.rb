@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:edit, :update, :show, :destroy]
-  before_action :require_user, except: [:index, :show]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: %i[edit update show destroy]
+  before_action :require_user, except: %i[index show]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def new
     @comment = Comment.new
@@ -14,18 +14,23 @@ class CommentsController < ApplicationController
   def edit; end
 
   def update
-
+    if @comment.update(comment_params)
+      flash[:success] = 'Article was successfully updated'
+      redirect_to article_path(@comment.article)
+    else
+      render 'edit'
+    end
   end
 
   def create
-    @article = Article.find(params[:id])
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    @comment.article_id = params[:article_id]
     if @comment.save
       flash[:success] = 'Comment was created'
-      redirect_to article_path(@article)
+      redirect_to article_path(@comment.article)
     else
-      flash.now[:danger] = "Failed to post the comment"
+      redirect_to articles_path
     end
 
   end
@@ -39,16 +44,17 @@ class CommentsController < ApplicationController
   def show; end
 
   private
+
   def set_comment
     @comment = Comment.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:description, article_id: [])
+    params.require(:comment).permit(:description, :article_id)
   end
 
   def require_same_user
-    if current_user != @comment.user
+    if current_user != @comment.user and !current_user.admin?
       flash[:danger] = "You can only edit or delete your own comments"
       redirect_to root_path
     end

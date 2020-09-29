@@ -9,18 +9,20 @@
           <%= truncate(article.description, length: 100) %>
           <div class="article-meta-details">
             <small>
-              Created by: <%= article.user.username if article.user %>", <%= time_ago_in_words(article.created_at) %>
+              Created by: <%= article.user.username if article.user %>, <%= time_ago_in_words(article.created_at) %>
               ago, last updated: <%= time_ago_in_words(article.updated_at) %> ago.
             </small>
           </div>
         </div>
+        <small>
         <% if article.categories.any? %>
           <p>Categories: <%= render article.categories %></p>
         <% end %>
+        </small>
         <% if logged_in? && (current_user == article.user) %>
           <div class="article-actions">
-            <%= link_to "Edit this article", edit_article_path(article), class: "btn btn-xs btn-primary" %>
-            <%= link_to "Delete this article", article_path(article), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" %>
+            <%= link_to "Edit this article", edit_article_path(article), class: "btn btn-sm btn-primary" %>
+            <%= link_to "Delete this article", article_path(article), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %>
           </div>
         <% end %>
       </div>
