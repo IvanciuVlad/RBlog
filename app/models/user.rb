@@ -3,11 +3,13 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :articles, dependent: :destroy
   has_many :article_categories
-  has_many :comments
+  has_many :comments, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  acts_as_voter
 
   def self.search(param)
     param.strip!

@@ -55,7 +55,7 @@ a {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eeaaee;
+  border-top: 2px solid #eeaaee;
   color: #777;
 }
 
@@ -93,13 +93,18 @@ footer ul li {
 
 .article-body {
   border-top: 1px solid #eaeaea;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .article-meta-details {
   border-top: 1px solid #eaeaea;
-  margin-top: 15px;
+  margin-top: 5px;
+}
+
+.article-score {
+  border-top: 2px solid #eaeaea;
+  margin-top: 0;
 }
 
 .listing {
@@ -123,6 +128,7 @@ footer ul li {
   border-top: 1px solid #eaeaea;
   padding-top: 15px;
   padding-bottom: 15px;
+  font-weight: bold;
 }
 
 .comment-description {
@@ -137,4 +143,10 @@ footer ul li {
 
 .results-block {
   background-color: white;
+}
+
+.article-created {
+  margin-top: 20px;
+  padding-top: 5px;
+  border-top: 2px solid #eeaaee;
 }

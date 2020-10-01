@@ -41,6 +41,18 @@ class ArticlesController < ApplicationController
 
   def show; end
 
+  def upvote
+    @article = Article.find(params[:article_id])
+    @article.upvote_by current_user
+    redirect_back(fallback_location: articles_path)
+  end
+
+  def downvote
+    @article = Article.find(params[:article_id])
+    @article.downvote_by current_user
+    redirect_back(fallback_location: articles_path)
+  end
+
   private
 
   def set_article
@@ -52,7 +64,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @article.user and !current_user.admin?
+    if (current_user != @article.user) && !current_user.admin?
       flash[:danger] = 'You can only edit or delete your own articles'
       redirect_to root_path
     end

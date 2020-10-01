@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'my_friends', to: 'users#my_friends'
   get 'search_friend', to: 'users#search'
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: %i[create destroy]
   resources :articles do
-    resources :comments, except: [:index, :destroy]
+    put 'like', to: 'articles#upvote'
+    put 'dislike', to: 'articles#downvote'
+    resources :comments, except: [:index]
   end
   resources :categories, except: [:destroy]
   resources :users, only: [:show]
-
 end
