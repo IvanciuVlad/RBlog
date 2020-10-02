@@ -13,6 +13,19 @@
     <p>Categories: <%= render @article.categories %></p>
   <% end %>
 
+  <div class="article-score">
+    <small>
+      <%= link_to article_like_path(@article), method: :put do %>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        <%= @article.get_upvotes.size %>
+      <% end %>
+      <%= link_to article_dislike_path(@article), method: :put do %>
+        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+        <%= @article.get_downvotes.size %>
+      <% end %>
+    </small>
+  </div>
+
   <div class="article-actions">
 
       <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
